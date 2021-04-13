@@ -1,0 +1,118 @@
+body,html{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.playerContainer{
+    width: 80vmin;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5vmin;
+}
+
+.boardContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.marginLeft{
+    display: flex;
+    margin-left: 11vmin;
+    align-items: center;
+}
+
+.marginRight{
+    display: flex;
+    margin-right: 11vmin;
+    align-items: center;
+}
+
+.textLabel{
+    color: white;
+}
+
+.playerInfo{
+    width: 20vmin;
+}
+
+.containerRow{
+    display: grid;
+    grid-template-rows: 20vmin 20vmin 20vmin;
+    grid-template-columns: 20vmin 20vmin 20vmin;
+}
+
+.borderLeft{
+    border-left: solid;
+    border-color: white;
+}
+
+.borderRight{
+    border-right: solid;
+    border-color: white;
+}
+
+.borderTop{
+    border-top: solid;
+    border-color: white;
+}
+
+.borderBottom{
+    border-bottom: solid;
+    border-color: white;
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box:hover{
+    cursor: pointer;
+}
+
+.image{
+    width: 75%;
+}
+
+.scoreboard{
+    margin-top: 5vmin;
+    display: grid;
+    grid-template-columns: 20vmin 20vmin 20vmin 20vmin;
+}
+
+.scoreboard:hover{
+    cursor: pointer;
+}
+
+.scoreColumn{
+    display: grid;
+    grid-template-rows: 8vmin 8vmin;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vmin;
+    color: white;
+}
+
+.opponentType{
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.type{
+    border: none;
+    width: 19vmin;
+    height: 7vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

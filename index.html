@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>TicTacToe</title>
+    <meta name="description" content="A tic tac toe game">
+    <meta name="author" content="F4tch">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="playerContainer">
+      <div class="marginRight">
+        <form action="/action_page.php">
+          <label for="fname" class="textLabel">P1:</label>
+          <input type="text" id="fname" class="playerInfo" name="fname" value="P1 Name">
+        </form>        
+      </div>
+      <div class="marginLeft">
+        <form action="/action_page.php">
+          <label for="fname" class="textLabel">P2:</label>
+          <input type="text" id="fname" class="playerInfo" name="fname" value="P2 Name">
+        </form>
+      </div>
+    </div>
+    <div class="boardContainer">        
+      <div id="container" class="containerRow">
+      </div>
+    </div>
+    
+    <div id="scoreboard" class="scoreboard">
+      <div id="scores" class="scoreColumn">
+        <div id="P1Ind" class="content borderBottom borderRight">P1 (x)</div>
+        <div id="P1Score"class="content borderTop borderRight">0</div>
+      </div>
+      <div id="scores" class="scoreColumn">
+        <div class="content borderBottom borderRight borderLeft">Tie</div>
+        <div id="tieScore" class="content borderTop borderRight borderLeft">0</div>
+      </div>
+      <div id="scores" class="scoreColumn">
+        <div id="P2Ind" class="content borderBottom borderRight borderLeft">P2 (o)</div>
+        <div id = "P2Score" class="content borderTop borderRight borderLeft">0</div>
+      </div>
+      <div id="opponentType"class="opponentType content borderRight borderTop borderBottom">
+        <div id="1P" class="type">
+          <span>vs Comp</span>
+        </div>
+        <div id="2P" class="type">
+          <span>2Player</span>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
