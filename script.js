@@ -64,13 +64,14 @@ var gameBoard = (function() {
 
     function blinkWinner(index){
         for(let i = 0; i<index.length; i++){
-            document.getElementById("image"+index[i]).style.opacity = 0.2;
+            //document.getElementById("image"+index[i]).style.opacity = 0.2;
+            document.getElementById("image"+index[i]).classList.add("imgBlink");
         }
-        setTimeout(function(){
-            for(let i = 0; i<index.length; i++){
-                document.getElementById("image"+index[i]).style.opacity = 1;
-            }
-        },400);
+        // setTimeout(function(){
+        //     for(let i = 0; i<index.length; i++){
+        //         document.getElementById("image"+index[i]).style.opacity = 1;
+        //     }
+        // },400);
     }
 
     function privateAddScore(winner){
@@ -220,10 +221,11 @@ var gameBoard = (function() {
                             _privateTurn="P1";
                             document.getElementById("P1Ind").style.background = "#333333";
                             document.getElementById("P2Ind").style.background = "#000000";
-                            setTimeout(function(){
+                            //setTimeout(function(){
                                 privateAddImage(move[0]);
-                            },150);
-                            setTimeout(function(){
+                                document.getElementById(move[0]).classList.add("imgIn");
+                            //},150);
+                            //setTimeout(function(){
                                 var checkWin = privateCheckWin(_privateGameBoard);
                                 privateAddScore(checkWin);
                                 if(checkWin[0]=="P1"||checkWin[0]=="P2"){
@@ -233,7 +235,7 @@ var gameBoard = (function() {
                                 else if(checkWin[0]=="tie"){
                                     _privateSetFinish = 1;
                                 }
-                            },200);
+                            //},200);
                         }
                     }
                     else if(_privateTurn=="P2"){
@@ -269,9 +271,10 @@ var gameBoard = (function() {
             _privateTurn="P1";
             document.getElementById("P1Ind").style.background = "#333333";
             document.getElementById("P2Ind").style.background = "#000000";
-            setTimeout(function(){
+            //setTimeout(function(){
                 privateAddImage(move[0]);
-            },150);
+                document.getElementById(move[0]).classList.add("imgIn");
+            //},150);
         }
     }
 

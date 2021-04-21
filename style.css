@@ -116,3 +116,82 @@ body,html{
     justify-content: center;
     align-items: center;
 }
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-moz-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-o-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-o-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.imgBlink{
+    -webkit-animation: blink 0.5s;
+    -webkit-animation-iteration-count: 3;
+    -moz-animation: blink 0.5s;
+    -moz-animation-iteration-count: 3;
+    -o-animation: blink 0.5s;
+    -o-animation-iteration-count: 3;
+}
+
+.imgIn{
+    -webkit-animation: fadeIn 0.5s;
+    -webkit-animation-iteration-count: 1;
+    -moz-animation: fadeIn 0.5s;
+    -moz-animation-iteration-count: 1;
+    -o-animation: fadeIn 0.5s;
+    -o-animation-iteration-count: 1;
+}
