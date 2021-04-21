@@ -289,7 +289,10 @@ var gameBoard = (function() {
         var nextTurn;
         var tempStep=0;
         var moves = [];
-        if(possibleMove.length>7){
+        if(possibleMove.length==9){
+            return [4,0,10];
+        }
+        if(possibleMove.length==8){
             if(currentBoard[4]==0){
                 return [4,0,10];
             }
@@ -297,7 +300,16 @@ var gameBoard = (function() {
                 return [0,0,10];
             }
         }
-        else if(possibleMove.length<2){
+        if(possibleMove.length==7){
+            var temp =[];
+            for(let i = 0; i<possibleMove.length; i++){
+                if(possibleMove[i]==0||possibleMove[i]==2||possibleMove[i]==6||possibleMove[i]==8){
+                    temp.push(possibleMove[i]);
+                }
+            }
+            possibleMove=temp;
+        }
+        if(possibleMove.length<2){
             var tempBoard = currentBoard.slice();
             if(turn=="P1"){
                 tempBoard[possibleMove[0]] = 1;
@@ -418,67 +430,16 @@ var gameBoard = (function() {
                 }
             }
         }
+        if(step==0||step==1){
+            console.log("step"+step+" "+turn);
+            console.log(currentBoard);
+            console.log(possibleMove);
+            console.log(moves);
+            console.log(fastestMove)
+        }
         return fastestMove;
     }
 
-    /*function privateMinimax(currentBoard,possibleMove,turn,step,firstTurn){
-        var nextTurn;
-        var tempStep;
-        var moves = [];
-        var fastestMove = [];
-        if(possibleMove.length==1){
-            var tempBoard = currentBoard.slice();
-                if(turn=="P1"){tempBoard[possibleMove[0]]=1;}
-                else if(turn=="P2"){tempBoard[possibleMove[0]]=6;}
-                var winner = privateCheckWin(tempBoard);
-                if(winner[0]=="P1"){
-                    fastestMove=[possibleMove[0],10-step];
-                }
-                else if(winner[0]=="P2"){
-                    fastestMove=[possibleMove[0],-10-step];
-                }
-                else if(winner[0]=="tie"){
-                    fastestMove=[possibleMove[0],-10-step];
-                }
-        }
-        else{
-            for(let i=0; i<possibleMove.length; i++){
-                var tempBoard = currentBoard.slice();
-                if(turn=="P1"){tempBoard[possibleMove[i]]=1;}
-                else if(turn=="P2"){tempBoard[possibleMove[i]]=6;}
-                var winner = privateCheckWin(tempBoard);
-                if(winner[0]=="P1"){
-                    moves.push([possibleMove[i],10-step]);
-                }
-                else if(winner[0]=="P2"){
-                    moves.push([possibleMove[i],10-step]);
-                }
-                else if(winner[0]=="tie"){
-                    fastestMove=[possibleMove[0],-10-step];
-                }
-                else if(winner[0]=="XX"){
-                    tempStep=step+1;
-                    if(turn=="P1"){nextTurn="P2";}
-                    else if(turn=="P2"){nextTurn="P1";}
-                    var nextPossible = possibleMove.slice();
-                    nextPossible.splice(i,1);
-                    moves.push(privateMinimax(tempBoard,nextPossible,nextTurn,tempStep,firstTurn));
-                }
-            }
-            var scoreP1 = 10;
-            for(let i= 0; i<moves.length; i++){
-                if(moves[i][1]<scoreP1&&moves[i][1]>0){
-                    fastestMove = moves[i]
-                    scoreP1=moves[i][1];
-                }
-            }
-        }
-        
-        //console.log(possibleMove);
-        // console.log(step);
-        // console.log(fastestMove);
-        return fastestMove;
-    }*/
 
     return {
         publicShowBoard,
