@@ -73,60 +73,71 @@ var gameBoard = (function() {
         },400);
     }
 
+    function privateAddScore(winner){
+        if(winner[0]=="P1"){
+            privateP1Win();
+        }
+        else if(winner[0]=="P2"){
+            privateP2Win();
+        }
+        else if(winner[0]=="tie"){
+            document.getElementById("tieScore").textContent = ++_privateTie;            
+        }
+    }
+
     function privateCheckWin(_privateGameBoard){
         var index = [0,0,0];
         var winner = "XX";
         if((_privateGameBoard[0]+_privateGameBoard[1]+_privateGameBoard[2]==3)){
-            index=[0,1,2]; winner="P1"; privateP1Win();
+            index=[0,1,2]; winner="P1";
         }
         else if((_privateGameBoard[0]+_privateGameBoard[1]+_privateGameBoard[2]==18)){
-            index=[0,1,2]; winner="P2"; privateP2Win();
+            index=[0,1,2]; winner="P2";
         }
         else if((_privateGameBoard[3]+_privateGameBoard[4]+_privateGameBoard[5]==3)){
-            index=[3,4,5]; winner="P1"; privateP1Win();
+            index=[3,4,5]; winner="P1";
         }
         else if((_privateGameBoard[3]+_privateGameBoard[4]+_privateGameBoard[5]==18)){
-            index=[3,4,5]; winner="P2"; privateP2Win();
+            index=[3,4,5]; winner="P2";
         }
         else if((_privateGameBoard[6]+_privateGameBoard[7]+_privateGameBoard[8]==3)){
-            index=[6,7,8]; winner="P1"; privateP1Win();
+            index=[6,7,8]; winner="P1";
         }
         else if((_privateGameBoard[6]+_privateGameBoard[7]+_privateGameBoard[8]==18)){
-            index=[6,7,8]; winner="P2"; privateP2Win();
+            index=[6,7,8]; winner="P2";
         }
         else if((_privateGameBoard[0]+_privateGameBoard[3]+_privateGameBoard[6]==3)){
-            index=[0,3,6]; winner="P1"; privateP1Win();
+            index=[0,3,6]; winner="P1";
         }
         else if((_privateGameBoard[0]+_privateGameBoard[3]+_privateGameBoard[6]==18)){
-            index=[0,3,6]; winner="P2"; privateP2Win();
+            index=[0,3,6]; winner="P2";
         }
         else if((_privateGameBoard[1]+_privateGameBoard[4]+_privateGameBoard[7]==3)){
-            index=[1,4,7]; winner="P1"; privateP1Win();
+            index=[1,4,7]; winner="P1";
         }
         else if((_privateGameBoard[1]+_privateGameBoard[4]+_privateGameBoard[7]==18)){
-            index=[1,4,7]; winner="P2"; privateP2Win();
+            index=[1,4,7]; winner="P2";
         }
         else if((_privateGameBoard[2]+_privateGameBoard[5]+_privateGameBoard[8]==3)){
-            index=[2,5,8]; winner="P1"; privateP1Win();
+            index=[2,5,8]; winner="P1";
         }
         else if((_privateGameBoard[2]+_privateGameBoard[5]+_privateGameBoard[8]==18)){
-            index=[2,5,8]; winner="P2"; privateP2Win();
+            index=[2,5,8]; winner="P2";
         }
         else if((_privateGameBoard[0]+_privateGameBoard[4]+_privateGameBoard[8]==3)){
-            index=[0,4,8]; winner="P1"; privateP1Win();
+            index=[0,4,8]; winner="P1";
         }
         else if((_privateGameBoard[0]+_privateGameBoard[4]+_privateGameBoard[8]==18)){
-            index=[0,4,8]; winner="P2"; privateP2Win();
+            index=[0,4,8]; winner="P2";
         }
         else if((_privateGameBoard[2]+_privateGameBoard[4]+_privateGameBoard[6]==3)){
-            index=[2,4,6]; winner="P1"; privateP1Win();
+            index=[2,4,6]; winner="P1";
         }
         else if((_privateGameBoard[2]+_privateGameBoard[4]+_privateGameBoard[6]==18)){
-            index=[2,4,6]; winner="P2"; privateP2Win();
+            index=[2,4,6]; winner="P2";
         }
         else if((_privateGameBoard.reduce((a, b) => a + b, 0)==34)||
         (_privateGameBoard.reduce((a, b) => a + b, 0)==29)){
-            document.getElementById("tieScore").textContent = ++_privateTie;            
             winner="tie";
         }
         return([winner,index]);
@@ -194,6 +205,7 @@ var gameBoard = (function() {
                         document.getElementById("P2Ind").style.background = "#333333";
                         privateAddImage(i);
                         var checkWin = privateCheckWin(_privateGameBoard);
+                        privateAddScore(checkWin);
                         if(checkWin[0]=="P1"||checkWin[0]=="P2"){
                             _privateSetFinish = 1;
                             blinkWinner(checkWin[1]);
@@ -203,8 +215,7 @@ var gameBoard = (function() {
                         }
                         if(Player2.getType()=="comp"&&_privateSetFinish!=1){
                             var moves = privatePossibleMoves();
-                            var move = privateMinimax(_privateGameBoard,moves,"P2","P2");
-                            console.log(_privateSetFinish);
+                            var move = privateMinimax(_privateGameBoard,moves,"P2",0,_privateFirstTurn);
                             _privateGameBoard[move[0]]=6;
                             _privateTurn="P1";
                             document.getElementById("P1Ind").style.background = "#333333";
@@ -212,9 +223,9 @@ var gameBoard = (function() {
                             setTimeout(function(){
                                 privateAddImage(move[0]);
                             },150);
-                            //privateRandomP2();
                             setTimeout(function(){
                                 var checkWin = privateCheckWin(_privateGameBoard);
+                                privateAddScore(checkWin);
                                 if(checkWin[0]=="P1"||checkWin[0]=="P2"){
                                     _privateSetFinish = 1;
                                     blinkWinner(checkWin[1]);
@@ -224,7 +235,6 @@ var gameBoard = (function() {
                                 }
                             },200);
                         }
-                        console.log(_privateSetFinish);
                     }
                     else if(_privateTurn=="P2"){
                         _privateGameBoard[i] = 6;
@@ -233,6 +243,7 @@ var gameBoard = (function() {
                         document.getElementById("P2Ind").style.background = "#000000";
                         privateAddImage(i);
                         var checkWin = privateCheckWin(_privateGameBoard);
+                        privateAddScore(checkWin);
                         if(checkWin[0]=="P1"||checkWin[0]=="P2"){
                             _privateSetFinish = 1;
                             blinkWinner(checkWin[1]);
@@ -245,15 +256,15 @@ var gameBoard = (function() {
                 else if(_privateSetFinish==1){
                     _privateGameBoard=[0,0,0,0,0,0,0,0,0];
                     _privateSetFinish=0;
-                    publicShowBoard();
                     _privateFirstTurn = "P1";
+                    publicShowBoard();
                 }
             });
         }
         if((_privateTurn=="P2")&&(Player2.getType()=="comp")){
             _privateFirstTurn = "P2";
             var moves = privatePossibleMoves();
-            var move = privateMinimax(_privateGameBoard,moves,"P2","P2");
+            var move = privateMinimax(_privateGameBoard,moves,"P2",1,_privateFirstTurn);
             _privateGameBoard[move[0]]=6;
             _privateTurn="P1";
             document.getElementById("P1Ind").style.background = "#333333";
@@ -261,7 +272,6 @@ var gameBoard = (function() {
             setTimeout(function(){
                 privateAddImage(move[0]);
             },150);
-            //privateRandomP2();
         }
     }
 
@@ -276,19 +286,43 @@ var gameBoard = (function() {
     }
 
     function privateMinimax(currentBoard,possibleMove,turn,step,firstTurn){
-        var tempBoard = currentBoard.slice();
         var nextTurn;
-        var tempStep;
-        if((possibleMove.length>7)&&(currentBoard[4]==0)){
-            return [4,0,10];
+        var tempStep=0;
+        var moves = [];
+        if(possibleMove.length>7){
+            if(currentBoard[4]==0){
+                return [4,0,10];
+            }
+            else{
+                return [0,0,10];
+            }
         }
         else if(possibleMove.length<2){
-            return [possibleMove[0], 0, 0];
+            var tempBoard = currentBoard.slice();
+            if(turn=="P1"){
+                tempBoard[possibleMove[0]] = 1;
+                nextTurn="P2";
+            }
+            else if(turn=="P2"){
+                tempBoard[possibleMove[0]] = 6;
+                nextTurn="P1";
+            }
+            var winner = privateCheckWin(tempBoard);
+            if(winner[0]=="P1"){
+                moves =[possibleMove[0],step,10];
+            }
+            else if(winner[0]=="P2"){
+                moves=[possibleMove[0],step,-10];
+            }
+            else if(winner[0]=="tie"){
+                moves=[possibleMove[0],step,-10];
+            }
         }
         else if((possibleMove.length>1)&&(possibleMove.length<9)){
-            var moves = [];
-            tempStep = ++step;
+            tempStep = step+1;
+            var P2win = 0;
             for(let i = 0; i<possibleMove.length; i++){
+                var tempBoard = currentBoard.slice();
                 if(turn=="P1"){
                     tempBoard[possibleMove[i]] = 1;
                     nextTurn="P2";
@@ -297,18 +331,15 @@ var gameBoard = (function() {
                     tempBoard[possibleMove[i]] = 6;
                     nextTurn="P1";
                 }
-                console.log("inside"+_privateSetFinish);
                 var winner = privateCheckWin(tempBoard);
-                console.log("afterinside"+_privateSetFinish);
                 if(winner[0]=="P1"){
-                    moves.push([possibleMove[i],step,-10]);
+                    moves.push([possibleMove[i],step,10]);
                 }
                 else if(winner[0]=="P2"){
-                    moves.push([possibleMove[i],step,10]);
-                    return [possibleMove[i],step,10];
+                    moves.push([possibleMove[i],step,-10]);
                 }
                 else if(winner[0]=="tie"){
-                    moves.push([possibleMove[i],step,0]);
+                    moves.push([possibleMove[i],step,-10]);
                 }
                 else if(winner[0]="XX"){
                     var nextPossible = possibleMove.slice();
@@ -316,30 +347,138 @@ var gameBoard = (function() {
                     moves.push(privateMinimax(tempBoard,nextPossible,nextTurn,tempStep,firstTurn));
                 }
             }
-            var fastestWin = [10, 0];
-            var fastestDraw = [10, 0];
-            for(let k = 0; k<moves.length; k++){
-                if((moves[k][2]==0)&&(moves[k][1]<fastestDraw)){
-                    fastestDraw = [moves[k][1], moves[k][0]];
+        }
+        var fastestMove = [0,10,0];
+        var drawscores = 0;
+        var winscore = 10;
+        var winprob = 0;
+        for(let k = 0; k<moves.length; k++){
+            if(possibleMove.length==1){                    
+                fastestMove=moves;
+            }
+            else{
+                if(firstTurn=="P1"){
+                    if(turn=="P2"){
+                        if(moves[k][2]==10&&moves[k][1]==step+1&&fastestMove[1]>step){
+                            fastestMove=moves[k];
+                        }
+                        else if(moves[k][2]==-10&&moves[k][1]==step){
+                            fastestMove=moves[k];
+                        }
+                        else if(moves[k][2]==-10&&moves[k][1]<winscore&&fastestMove[1]>step+1){
+                            fastestMove=moves[k];
+                            drawscores=moves[k][1];
+                        }    
+                    }
+                    else if(turn=="P1"){
+                        if(moves[k][2]==10&&moves[k][1]==step){
+                            fastestMove=moves[k];
+                            break;
+                        }
+                        else if(moves[k][2]==-10&&moves[k][1]==step+1){
+                            fastestMove=moves[k];
+                            break;
+                        }
+                        else if(moves[k][2]==-10&&moves[k][1]>drawscores){
+                            fastestMove=moves[k];
+                            winscore=moves[k][1];
+                        }
+                        else if(moves[k][2]==10&&moves[k][1]<winscore){
+                            fastestMove=moves[k];
+                            winscore=moves[k][1];
+                        }
+                    }
                 }
-                else if((moves[k][2]==10)&&(moves[k][1]<fastestWin)){
-                    fastestWin = [moves[k][1], moves[k][0]];
-                }
-            }                
-            if(firstTurn=="P2"){
-                if(fastestWin[0]<=fastestDraw[0]){
-                    return [fastestWin[1], fastestWin[0], 10];
-                }
-                else{
-                    return [fastestDraw[1], fastestDraw[0], 10];
+                else if(firstTurn=="P2"){
+                    if(turn=="P2"){
+                        if(moves[k][2]==10&&moves[k][1]==step+1&&fastestMove[1]>step){
+                            fastestMove=moves[k];
+                        }
+                        else if(moves[k][2]==-10&&moves[k][1]==step){
+                            fastestMove=moves[k];
+                        }
+
+                        else if(moves[k][2]==-10&&moves[k][1]<winscore&&fastestMove[1]>step){
+                            fastestMove=moves[k];
+                            winscore=moves[k][1];
+                        }
+                    }
+                    else if(turn=="P1"){
+                        if(moves[k][2]==-10&&moves[k][1]==step+1&&fastestMove[1]>step){
+                            fastestMove=moves[k];
+                        }
+                        else if(moves[k][2]==10&&moves[k][1]==step){
+                            fastestMove=moves[k];
+                        }
+                        else if(moves[k][2]==10&&moves[k][1]<winscore&&fastestMove[1]>step+1){
+                            fastestMove=moves[k];
+                            drawscores=moves[k][1];
+                        }
+                    }
                 }
             }
-            else if(firstTurn="P1"){
-                return [fastestDraw[1], fastestDraw[0], 10];
+        }
+        return fastestMove;
+    }
+
+    /*function privateMinimax(currentBoard,possibleMove,turn,step,firstTurn){
+        var nextTurn;
+        var tempStep;
+        var moves = [];
+        var fastestMove = [];
+        if(possibleMove.length==1){
+            var tempBoard = currentBoard.slice();
+                if(turn=="P1"){tempBoard[possibleMove[0]]=1;}
+                else if(turn=="P2"){tempBoard[possibleMove[0]]=6;}
+                var winner = privateCheckWin(tempBoard);
+                if(winner[0]=="P1"){
+                    fastestMove=[possibleMove[0],10-step];
+                }
+                else if(winner[0]=="P2"){
+                    fastestMove=[possibleMove[0],-10-step];
+                }
+                else if(winner[0]=="tie"){
+                    fastestMove=[possibleMove[0],-10-step];
+                }
+        }
+        else{
+            for(let i=0; i<possibleMove.length; i++){
+                var tempBoard = currentBoard.slice();
+                if(turn=="P1"){tempBoard[possibleMove[i]]=1;}
+                else if(turn=="P2"){tempBoard[possibleMove[i]]=6;}
+                var winner = privateCheckWin(tempBoard);
+                if(winner[0]=="P1"){
+                    moves.push([possibleMove[i],10-step]);
+                }
+                else if(winner[0]=="P2"){
+                    moves.push([possibleMove[i],10-step]);
+                }
+                else if(winner[0]=="tie"){
+                    fastestMove=[possibleMove[0],-10-step];
+                }
+                else if(winner[0]=="XX"){
+                    tempStep=step+1;
+                    if(turn=="P1"){nextTurn="P2";}
+                    else if(turn=="P2"){nextTurn="P1";}
+                    var nextPossible = possibleMove.slice();
+                    nextPossible.splice(i,1);
+                    moves.push(privateMinimax(tempBoard,nextPossible,nextTurn,tempStep,firstTurn));
+                }
+            }
+            var scoreP1 = 10;
+            for(let i= 0; i<moves.length; i++){
+                if(moves[i][1]<scoreP1&&moves[i][1]>0){
+                    fastestMove = moves[i]
+                    scoreP1=moves[i][1];
+                }
             }
         }
         
-    }
+        //console.log(possibleMove);
+        // console.log(step);
+        // console.log(fastestMove);
+        return fastestMove;
+    }*/
 
     return {
         publicShowBoard,
@@ -357,9 +496,11 @@ document.querySelectorAll('#scores').forEach(item =>{
 document.getElementById("opponentType").addEventListener('click', function(e){
     if(Player2.getType()=="player"){
         Player2.setType("comp");
+        document.getElementById("P2Ind").textContent = "Comp (o)";
     }
     else if(Player2.getType()=="comp"){
         Player2.setType("player");
+        document.getElementById("P2Ind").textContent = "P2 (o)";
     }
     gameBoard.publicReset();
 })
