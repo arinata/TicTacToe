@@ -65,6 +65,7 @@ var gameBoard = (function() {
     function blinkWinner(index){
         for(let i = 0; i<index.length; i++){
             //document.getElementById("image"+index[i]).style.opacity = 0.2;
+            document.getElementById("image"+index[i]).classList.remove("imgIn");
             document.getElementById("image"+index[i]).classList.add("imgBlink");
         }
         // setTimeout(function(){
@@ -223,7 +224,7 @@ var gameBoard = (function() {
                             document.getElementById("P2Ind").style.background = "#000000";
                             //setTimeout(function(){
                                 privateAddImage(move[0]);
-                                document.getElementById(move[0]).classList.add("imgIn");
+                                document.getElementById("image"+move[0]).classList.add("imgIn");
                             //},150);
                             //setTimeout(function(){
                                 var checkWin = privateCheckWin(_privateGameBoard);
@@ -273,7 +274,7 @@ var gameBoard = (function() {
             document.getElementById("P2Ind").style.background = "#000000";
             //setTimeout(function(){
                 privateAddImage(move[0]);
-                document.getElementById(move[0]).classList.add("imgIn");
+                document.getElementById("image"+move[0]).classList.add("imgIn");
             //},150);
         }
     }
