@@ -430,13 +430,13 @@ var gameBoard = (function() {
                 }
             }
         }
-        if(step==0||step==1){
-            console.log("step"+step+" "+turn);
-            console.log(currentBoard);
-            console.log(possibleMove);
-            console.log(moves);
-            console.log(fastestMove)
-        }
+        // if(step==0||step==1){
+        //     console.log("step"+step+" "+turn);
+        //     console.log(currentBoard);
+        //     console.log(possibleMove);
+        //     console.log(moves);
+        //     console.log(fastestMove)
+        // }
         return fastestMove;
     }
 
