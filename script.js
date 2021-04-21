@@ -471,3 +471,4 @@ document.getElementById("opponentType").addEventListener('click', function(e){
 })
 
 gameBoard.publicShowBoard();
+document.getElementById("P1Ind").style.background = "#333333";
