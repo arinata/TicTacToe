@@ -313,15 +313,15 @@ var gameBoard = (function() {
         //     }
         //     possibleMove=temp;
         // }
-        if(possibleMove.length==6&&currentBoard[4]==6){
-            var temp =[];
-            for(let i = 0; i<possibleMove.length; i++){
-                if(possibleMove[i]==1||possibleMove[i]==3||possibleMove[i]==5||possibleMove[i]==7){
-                    temp.push(possibleMove[i]);
-                }
-            }
-            possibleMove=temp;
-        }
+        // if(possibleMove.length==6&&currentBoard[4]==6){
+        //     var temp =[];
+        //     for(let i = 0; i<possibleMove.length; i++){
+        //         if(possibleMove[i]==1||possibleMove[i]==3||possibleMove[i]==5||possibleMove[i]==7){
+        //             temp.push(possibleMove[i]);
+        //         }
+        //     }
+        //     possibleMove=temp;
+        // }
         if(possibleMove.length<2){
             var tempBoard = currentBoard.slice();
             if(turn=="P1"){
