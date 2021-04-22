@@ -304,10 +304,19 @@ var gameBoard = (function() {
                 return [0,0,10];
             }
         }
-        if(possibleMove.length==7){
+        // if(possibleMove.length==7){
+        //     var temp =[];
+        //     for(let i = 0; i<possibleMove.length; i++){
+        //         if(possibleMove[i]==0||possibleMove[i]==2||possibleMove[i]==6||possibleMove[i]==8){
+        //             temp.push(possibleMove[i]);
+        //         }
+        //     }
+        //     possibleMove=temp;
+        // }
+        if(possibleMove.length==6&&currentBoard[4]==6){
             var temp =[];
             for(let i = 0; i<possibleMove.length; i++){
-                if(possibleMove[i]==0||possibleMove[i]==2||possibleMove[i]==6||possibleMove[i]==8){
+                if(possibleMove[i]==1||possibleMove[i]==3||possibleMove[i]==5||possibleMove[i]==7){
                     temp.push(possibleMove[i]);
                 }
             }
@@ -434,13 +443,13 @@ var gameBoard = (function() {
                 }
             }
         }
-        // if(step==0||step==1){
-        //     console.log("step"+step+" "+turn);
-        //     console.log(currentBoard);
-        //     console.log(possibleMove);
-        //     console.log(moves);
-        //     console.log(fastestMove)
-        // }
+        if(step==0||step==1){
+            console.log("step"+step+" "+turn);
+            console.log(currentBoard);
+            console.log(possibleMove);
+            console.log(moves);
+            console.log(fastestMove)
+        }
         return fastestMove;
     }
 
