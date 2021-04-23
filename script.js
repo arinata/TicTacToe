@@ -326,6 +326,15 @@ var gameBoard = (function() {
             }
             possibleMove=temp;
         }
+        if(possibleMove.length==6&&currentBoard[4]==1&&currentBoard[8]==1){
+            var i = Math.random();
+            if(i<0.5){
+                return [2,0,-10];
+            }
+            else{
+                return [6,0,-10];
+            }
+        }
         if(possibleMove.length<2){
             var tempBoard = currentBoard.slice();
             if(turn=="P1"){
@@ -405,8 +414,7 @@ var gameBoard = (function() {
                             break;
                         }
                         else if(moves[k][2]==-10&&moves[k][1]==step+1){
-                            fastestMove=moves[k];
-                            break;
+                            fastestMove=moves[k];                            
                         }
                         else if(moves[k][2]==-10&&moves[k][1]>drawscores){
                             fastestMove=moves[k];
@@ -447,13 +455,13 @@ var gameBoard = (function() {
                 }
             }
         }
-        if(step==0||step==1){
-            console.log("step"+step+" "+turn);
-            console.log(currentBoard);
-            console.log(possibleMove);
-            console.log(moves);
-            console.log(fastestMove)
-        }
+        // if(step==0||step==1){
+        //     console.log("step"+step+" "+turn);
+        //     console.log(currentBoard);
+        //     console.log(possibleMove);
+        //     console.log(moves);
+        //     console.log(fastestMove)
+        // }
         return fastestMove;
     }
 
