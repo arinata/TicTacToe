@@ -316,9 +316,11 @@ var gameBoard = (function() {
         if(possibleMove.length==6&&currentBoard[4]==6&&!(
             (currentBoard[0]==1&&currentBoard[1]==1)||(currentBoard[0]==1&&currentBoard[3]==1)||
             (currentBoard[2]==1&&currentBoard[1]==1)||(currentBoard[2]==1&&currentBoard[5]==1)||
-            (currentBoard[6]==1&&currentBoard[2]==1)||(currentBoard[6]==1&&currentBoard[7]==1)||
+            (currentBoard[6]==1&&currentBoard[3]==1)||(currentBoard[6]==1&&currentBoard[7]==1)||
             (currentBoard[8]==1&&currentBoard[5]==1)||(currentBoard[8]==1&&currentBoard[7]==1))){
             var temp =[];
+            console.log("ini");
+            console.log(currentBoard);
             for(let i = 0; i<possibleMove.length; i++){
                 if(possibleMove[i]==1||possibleMove[i]==3||possibleMove[i]==5||possibleMove[i]==7){
                     temp.push(possibleMove[i]);
@@ -455,13 +457,13 @@ var gameBoard = (function() {
                 }
             }
         }
-        // if(step==0||step==1){
-        //     console.log("step"+step+" "+turn);
-        //     console.log(currentBoard);
-        //     console.log(possibleMove);
-        //     console.log(moves);
-        //     console.log(fastestMove)
-        // }
+        if(step==0||step==1){
+            console.log("step"+step+" "+turn);
+            console.log(currentBoard);
+            console.log(possibleMove);
+            console.log(moves);
+            console.log(fastestMove)
+        }
         return fastestMove;
     }
 
